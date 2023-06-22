@@ -42,8 +42,9 @@ if __name__ == "__main__":
     parser.add_argument('hdf5_file', default=None, type=str, help='name of hdf5 file to save the data')
     parser.add_argument('-wi', '--width', default=1024, type=int, help="camera rgb and depth sensor width in pixels")
     parser.add_argument('-he', '--height', default=768, type=int, help="camera rgb and depth sensor width in pixels")
-    parser.add_argument('-ve', '--vehicles', default=0, type=int, help="number of vehicles to spawn in the simulation")
-    parser.add_argument('-wa', '--walkers', default=0, type=int, help="number of walkers to spawn in the simulation")
+    parser.add_argument('-ve', '--vehicles', default=100, type=int, help="number of vehicles to spawn in the simulation")
+    parser.add_argument('-wa', '--walkers', default=110, type=int, help="number of walkers to spawn in the simulation")
+    parser.add_argument('-sd', '--save_dir', default='./new_vids', type=str, help="save dir path")
     parser.add_argument('-v', '--video', action="store_true", help="record a mp4 video on top of the recorded hdf5 file")
     parser.add_argument('-d', '--depth', action='store_true', help="show the depth video side by side with the rgb")
     args = parser.parse_args()
@@ -59,7 +60,7 @@ if __name__ == "__main__":
     fov = 90
     
     # Beginning data capture proccedure
-    HDF5_file = HDF5Saver(sensor_width, sensor_height, os.path.join("new_vids", args.hdf5_file + ".hdf5"))
+    HDF5_file = HDF5Saver(sensor_width, sensor_height, os.path.join(args.save_dir, args.hdf5_file + ".hdf5"))
     print("HDF5 File opened")
     CarlaWorld = CarlaWorld(HDF5_file=HDF5_file)
 
@@ -85,4 +86,4 @@ if __name__ == "__main__":
 
     # For later visualization
     if args.video:
-        create_video_sample(os.path.join('new_vids', args.hdf5_file + ".hdf5"), show_depth=args.depth)
+        create_video_sample(os.path.join(args.save_dir, args.hdf5_file + ".hdf5"), show_depth=args.depth)

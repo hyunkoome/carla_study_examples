@@ -26,7 +26,7 @@ def camera_callback2(image, data, save_dir):
 
 
 def main():
-    save_dir = '/home/hyun/DATA/Codes/carla_hyunkoo_examples/images'
+    save_dir = '/home/hyunkoo/DATA/Study_Carla/SaveCarla/images'
     print("")
     # Laden von Carla,Library,Map, erstellen des Spectators
     client = carla.Client('localhost', 2000)
